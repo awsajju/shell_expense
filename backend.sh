@@ -35,9 +35,9 @@ validate $? "creating user"
 mkdir app
 
 curl -o /tmp/backend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip
-valdiate $? "downloading code"
+validate $? "downloading code"
 
-cd /app
+cd app
 
 unzip /tmp/backend.zip
 validate $? "unzip the backend"

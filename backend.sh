@@ -11,6 +11,8 @@ fi
 
 }
 
+check_root
+
 validate (){
     if [ $1 -ne 0 ];then
         echo "$2 installing failure"
@@ -51,7 +53,7 @@ dnf install mysql -y
 validate $? "installing mysql"
 
 mysql -h mysql.myfooddy.fun -u root -pExpenseApp@1 < /root/app/schema/backend.sql
-validate $1 "setting up the transaction schema and tables"
+validate $? "setting up the transaction schema and tables"
 
 systemctl daemon-reload
 validate $? "Daemon reload"

@@ -53,12 +53,12 @@ validate $? "unzip the backend"
 npm install
 validate $? "installing dependencies"
 
-cp /home/ec2-user/shell-expense/backend.service /etc/systemd/system/backend.service
+cp /home/ec2-user/shell_expense/backend.service /etc/systemd/system/backend.service
 
 dnf install mysql -y
 validate $? "installing mysql"
 
-mysql -h mysql.myfooddy.fun -u root -pExpenseApp@1 < /root/app/schema/backend.sql
+mysql -h mysql.myfooddy.fun -u root -pExpenseApp@1 < /home/ec2-user/shell_expense/schema/backend.sql
 validate $? "setting up the transaction schema and tables"
 
 systemctl daemon-reload

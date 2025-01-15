@@ -31,15 +31,21 @@ validate $? "enables nodejs 20"
 dnf install nodejs -y
 validate $? "installing nodejs"
 
-useradd Expense
-validate $? "creating user"
+id Expense
+if [ $? -ne 0 ];then
+    useradd Expense
+    validate $? "creating user"
+else
+    echo "user already exits"
+fi
 
-mkdir app
+
+mkdir -p /app
 
 curl -o /tmp/backend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip
 validate $? "downloading code"
 
-cd app
+cd /app
 
 unzip /tmp/backend.zip
 validate $? "unzip the backend"

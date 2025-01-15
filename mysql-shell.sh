@@ -32,8 +32,15 @@ validate $? "Enabling mysql server"
 systemctl start mysqld
 validate $? "starting mysql server"
 
-mysql_secure_installation --set-root-pass ExpenseApp@1
-validate $? "set the root password"
+
+mysql -h mysql.myfooddy.fun -u root -pExpenseApp@1 -e 'show databases;'
+if [ $? -ne 0 ];then
+    echo "mysql root passwword not setup"
+    mysql_secure_installation --set-root-pass ExpenseApp@1
+    validate $? "set the root password"
+else
+    echo "mysql root password already setup .... $Y SKIPPING $N"
+fi
 
 
 
